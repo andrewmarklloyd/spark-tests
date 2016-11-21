@@ -1,0 +1,8 @@
+version: '2'
+services:
+  terra:
+    image: shawks03/sparktitantests
+    container_name: terra
+    command: /bin/bash
+    volumes:
+      - ./:/test/
