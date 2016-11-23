@@ -8,29 +8,31 @@
 
 version: '2'
 services:
-  spark_master:
+  sparkmaster:
     image: shawks03/sparktitantests
-    container_name: spark_master
+    container_name: sparkmaster
     volumes:
       - ./scripts:/scripts
-    command: /opt/spark/sbin/start-master.sh
+    command: /scripts/run-master.sh
+    ports:
+      - 8080:8080
   
   spark_slave:
     image: shawks03/sparktitantests
-    command: /opt/spark/sbin/start-slave.sh spark://spark_master:7077
+    command: /scripts/run-slave.sh
     depends_on:
-      - spark_master
+      - sparkmaster
     volumes:
       - ./scripts:/scripts
   
-#  spark_util:
-#    image: shawks03/sparktitantests
-#    container_name: spark_util
-#    command: cd //opt/spark/bin/spark-submit --class "Pi" --driver-memory 6g --master spark://spark_master:7077 /sources/SparkTitanTests/build/jars/calculatepi_2.11-1.0.jar 100
-#    volumes:
-#      - ./scripts:/scripts
-#    depends_on:
-#      - spark_slave
+  spark_util:
+    image: shawks03/sparktitantests
+    container_name: spark_util
+    command: /scripts/run-submitter.sh
+    volumes:
+      - ./scripts:/scripts
+    depends_on:
+      - spark_slave
 
 #  titan:
 #    image: shawks03/sparktitantests
