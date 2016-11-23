@@ -1,8 +1,45 @@
+# start spark_master using /opt/spark/sbin/start-master.sh
+# start spark_slave using /opt/spark/sbin/start-slave.sh spark://spark_master:7077
+# start spark_util using /opt/spark/bin/spark-submit --class "Pi" --driver-memory 6g --master spark://spark_master:7077 ./jars/calculatepi_2.11-1.0.jar 100
+
+######################################################################################################
+####### Need to run a command that keeps container alive after starting master and slaves ############
+######################################################################################################
+
 version: '2'
 services:
-  terra:
+  spark_master:
     image: shawks03/sparktitantests
-    container_name: terra
-    command: /bin/bash
+    container_name: spark_master
     volumes:
-      - ./:/test/
+      - ./scripts:/scripts
+    command: /opt/spark/sbin/start-master.sh
+  
+  spark_slave:
+    image: shawks03/sparktitantests
+    command: /opt/spark/sbin/start-slave.sh spark://spark_master:7077
+    depends_on:
+      - spark_master
+    volumes:
+      - ./scripts:/scripts
+  
+#  spark_util:
+#    image: shawks03/sparktitantests
+#    container_name: spark_util
+#    command: cd //opt/spark/bin/spark-submit --class "Pi" --driver-memory 6g --master spark://spark_master:7077 /sources/SparkTitanTests/build/jars/calculatepi_2.11-1.0.jar 100
+#    volumes:
+#      - ./scripts:/scripts
+#    depends_on:
+#      - spark_slave
+
+#  titan:
+#    image: shawks03/sparktitantests
+#    container_name: titan
+#    command: /scripts/start.sh
+#    volumes:
+#      - ./:/scripts
+#    ports:
+#      # Elasticsearch
+#      - 9300:9300
+#      # Gremlin-Server
+#      - 8182:8182
