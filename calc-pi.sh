@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Test spark
-cd /sources/SparkTitanTests/build/ && ./bin/calculatePi.sh 100
-
-# Test with titan
-/opt/titan/bin/titan.sh start
-cd /sources/SparkTitanTests/build/ &&
-./bin/calculatePiTitan.sh 100
+docker-compose up -d
+docker-compose scale spark_slave=5
+docker-compose logs --follow
