@@ -1,10 +1,3 @@
-# start spark_master using /opt/spark/sbin/start-master.sh
-# start spark_slave using /opt/spark/sbin/start-slave.sh spark://spark_master:7077
-# start spark_util using /opt/spark/bin/spark-submit --class "Pi" --driver-memory 6g --master spark://spark_master:7077 ./jars/calculatepi_2.11-1.0.jar 100
-
-######################################################################################################
-####### Need to run a command that keeps container alive after starting master and slaves ############
-######################################################################################################
 
 version: '2'
 services:
@@ -37,11 +30,6 @@ services:
 #  titan:
 #    image: shawks03/sparktitantests
 #    container_name: titan
-#    command: /scripts/start.sh
+#    command: /scripts/run-titan.sh
 #    volumes:
-#      - ./:/scripts
-#    ports:
-#      # Elasticsearch
-#      - 9300:9300
-#      # Gremlin-Server
-#      - 8182:8182
+#      - ./scripts:/scripts
