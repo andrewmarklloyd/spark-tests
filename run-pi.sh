@@ -4,33 +4,61 @@ programname=$0
 
 function usage() {
     echo "Usage: $programname"
-    echo "  --local     run 3 slave nodes locally without Titan integration to calculate pi and tail logs"
+    echo "  --local           Run 3 slave nodes locally without Titan integration to calculate pi and tail logs"
+    echo "                    Ctrl c will shutdown containers and show result of Pi"
     echo ""
-    echo "  --cluster   run "
+    echo "  --local-titan     Run 3 slave nodes with Titan integration to calculate pi and tail logs"
+    echo "                    Ctrl c will shutdown containers and show result of Pi"
+    echo ""
+    echo "  --cluster-titan         run "
     exit 1
 }
 
+function dockerLocal() {
+	docker-compose -f local/docker-compose.yml "$@"
+}
+
+function dockerLocalTitan() {
+	docker-compose -f localTitan/docker-compose.yml "$@"
+}
+
 function runlocal() {
+	docker build -t andrew_sparktest .
 	trap ctrl_c INT
 	ctrl_c() {
 		echo "Shutting down containers"
-		docker-compose down
+		dockerLocal logs spark_util | grep 'Pi is roughly'
+		dockerLocal down
 	}
-	docker-compose up -d
-	docker-compose scale spark_slave=3
-	docker-compose logs --follow
-
+	dockerLocal up -d
+	dockerLocal scale spark_slave=3
+	dockerLocal logs --follow
 }
 
-runcluster() {
-	echo 'not implemented'
+function runlocalTitan() {
+	docker build -t andrew_sparktest .
+	trap ctrl_c INT
+	ctrl_c() {
+		echo "Shutting down containers"
+		dockerLocalTitan logs spark_util | grep 'Pi is roughly'
+		dockerLocalTitan down
+	}
+	dockerLocalTitan up -d
+	dockerLocalTitan scale spark_slave=3
+	dockerLocalTitan logs --follow	
+}
+
+runclusterTitan() {
+	echo 'Not implemented yet'
 }
 
 case $1 in
 	"--local" )
 		runlocal;;
-	"--cluster" )
-		runcluster;;
+	"--local-titan" )
+		runlocalTitan;;
+	"--cluster-titan" )
+		runclusterTitan;;
 	*)
 		usage
 esac
