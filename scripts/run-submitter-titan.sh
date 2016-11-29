@@ -9,7 +9,12 @@ NUM_SAMPLES=1000
 TITAN_LIB_DIR=local:/opt/titan/lib
 
 #// TODO: Will need to change this when using cluster.
-TITAN_CONF="cassandra:cassandra"
+
+# 
+#	Set conf/mygraph.properties setting the storage backend,
+#	storage.hostname, storage.index.search.hostname etc...
+#
+TITAN_CONF=/opt/titan/conf/mygraph.properties
 
 /opt/spark/bin/spark-submit --class "Pi" --driver-memory 6g --master spark://sparkmaster:7077 --jars \
 $TITAN_LIB_DIR/titan-core-1.0.0.jar\
