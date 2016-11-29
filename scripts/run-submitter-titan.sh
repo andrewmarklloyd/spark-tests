@@ -1,12 +1,12 @@
 #!/bin/bash
 
-sleep 25
+sleep 15
 
 cd /sources/SparkTitanTests/build/
 # Program options.
 NUM_SAMPLES=1000
 
-TITAN_LIB_DIR=/opt/titan/lib
+TITAN_LIB_DIR=local:/opt/titan/lib
 
 #// TODO: Will need to change this when using cluster.
 TITAN_CONF="cassandra:titan"
