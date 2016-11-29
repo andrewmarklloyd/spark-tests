@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sleep 15
+sleep 30
 
 cd /sources/SparkTitanTests/build/
 # Program options.
@@ -9,7 +9,7 @@ NUM_SAMPLES=1000
 TITAN_LIB_DIR=local:/opt/titan/lib
 
 #// TODO: Will need to change this when using cluster.
-TITAN_CONF="cassandra:titan"
+TITAN_CONF="cassandra:cassandra"
 
 /opt/spark/bin/spark-submit --class "Pi" --driver-memory 6g --master spark://sparkmaster:7077 --jars \
 $TITAN_LIB_DIR/titan-core-1.0.0.jar\
