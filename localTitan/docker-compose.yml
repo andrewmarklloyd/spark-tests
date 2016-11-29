@@ -1,0 +1,50 @@
+
+version: '2'
+services:
+  sparkmaster:
+    image: andrew_sparktest
+    container_name: sparkmaster
+    command: /scripts/run-master.sh
+    ports:
+      - 8080:8080
+  
+  spark_slave:
+    image: andrew_sparktest
+    command: /scripts/run-slave.sh
+    depends_on:
+      - sparkmaster
+    ports:
+      - 8081
+  
+  elasticsearch:
+    image: elasticsearch:2.4
+    container_name: elasticsearch
+    ports:
+      - 9200:9200
+
+  cassandra:
+    image: cassandra:2.1
+    container_name: cassandra
+    ports:
+      - 7000:7000
+      - 7001:7001
+      - 7199:7199
+      - 9160:9160
+      - 9042:9042
+
+  spark_util:
+    image: andrew_sparktest
+    container_name: spark_util
+    command: /scripts/run-submitter-titan.sh
+
+
+#http://stackoverflow.com/questions/20575640/datastax-devcenter-fails-to-connect-to-the-remote-cassandra-database
+#https://github.com/jbmusso/gremlin-javascript/issues/59
+
+#In the cassandra.yaml, I set
+#listen_address: localhost
+#rpc_address: 1.2.3.4
+#broadcast_rpc_address: 1.2.3.4
+
+#http://s3.thinkaurelius.com/docs/titan/1.0.0/server.html
+#

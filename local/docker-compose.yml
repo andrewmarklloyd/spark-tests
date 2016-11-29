@@ -2,16 +2,14 @@
 version: '2'
 services:
   sparkmaster:
-    build: ./
-    image: sparktest
+    image: andrew_sparktest
     container_name: sparkmaster
     command: /scripts/run-master.sh
     ports:
       - 8080:8080
   
   spark_slave:
-    build: ./
-    image: sparktest
+    image: andrew_sparktest
     command: /scripts/run-slave.sh
     ports:
       - 4040
@@ -20,8 +18,7 @@ services:
       - sparkmaster
   
   spark_util:
-    build: ./
-    image: sparktest
+    image: andrew_sparktest
     container_name: spark_util
     command: /scripts/run-submitter.sh
     depends_on:
