@@ -2,28 +2,28 @@
 version: '2'
 services:
   sparkmaster:
-    image: shawks03/sparktitantests
+    build: ./
+    image: sparktest
     container_name: sparkmaster
-    volumes:
-      - ./scripts:/scripts
     command: /scripts/run-master.sh
     ports:
       - 8080:8080
   
   spark_slave:
-    image: shawks03/sparktitantests
+    build: ./
+    image: sparktest
     command: /scripts/run-slave.sh
+    ports:
+      - 4040
+      - 8081
     depends_on:
       - sparkmaster
-    volumes:
-      - ./scripts:/scripts
   
   spark_util:
-    image: shawks03/sparktitantests
+    build: ./
+    image: sparktest
     container_name: spark_util
     command: /scripts/run-submitter.sh
-    volumes:
-      - ./scripts:/scripts
     depends_on:
       - spark_slave
 
