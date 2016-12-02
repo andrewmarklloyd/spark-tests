@@ -9,7 +9,4 @@ docker:
   services:
     - docker:dind
   script:
-    - docker-compose version
-    - docker-compose -f local/docker-compose.yml up -d
-    - docker-compose -f local/docker-compose.yml scale spark_slave=3
-    - docker-compose -f local/docker-compose.yml logs --follow
+    - ./run-pi.sh --local
