@@ -9,5 +9,6 @@ docker:
   services:
     - docker:dind
   script:
+    - shopt -s extglob
     - ls -l
     - bash run-pi.sh --local
