@@ -9,4 +9,5 @@ docker:
   services:
     - docker:dind
   script:
-    - ./run-pi.sh --local
+    - ls -l
+    
