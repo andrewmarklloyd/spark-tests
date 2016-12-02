@@ -17,10 +17,11 @@ services:
       - 8081
   
   elasticsearch:
-    image: elasticsearch:2.4
+    image: elasticsearch:1.5
     container_name: elasticsearch
     ports:
       - 9200:9200
+      - 9300:9300
 
   cassandra:
     image: cassandra:2.1
