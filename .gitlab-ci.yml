@@ -10,4 +10,4 @@ docker:
     - docker:dind
   script:
     - ls -l
-    
+    - sh run-pi.sh --local
