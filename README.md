@@ -4,7 +4,7 @@
 
 ### Basic usage
 - `./calc-pi.sh --local` Run 3 slave nodes locally without Titan integration to calculate pi and tail logs. Ctrl c will shutdown containers and show result of Pi
-- Spark master node will have a web UI accessible at http://<docker-ip>:8080 that will give details of registered nodes and jobs. IP address of docker container will vary by configuration but will generally be accessible on localhost
+- Spark master node will have a web UI accessible at `http://<docker-ip>:8080` that will give details of registered nodes and jobs. IP address of docker container will vary by configuration but will generally be accessible on localhost
 
 ### Current Workarounds
 - Setup is only for running multiple nodes on single machine. Support for multi-machine/multi-node in progress
@@ -14,6 +14,9 @@
 
 ### Use with Titan DB (Partially implemented)
 - `./calc-pi.sh --local-titan` Run 3 slave nodes with Titan integration to calculate pi and tail logs. Ctrl c will shutdown containers and show result of Pi
+- Connects remotely to distributed cassandra database via Titan
+- Implementing remote elastic search container now
+    - Lack of elasticsearch implementation results in extremly slow run time. Time will be reduced dramatically after elasticsearch implementation
 
 ### Use with Titan DB distributed (Not Implemented)
 - `./calc-pi.sh --cluster-titan`
