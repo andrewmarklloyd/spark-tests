@@ -4,3 +4,6 @@ FROM shawks03/sparktitantests
 MAINTAINER Andrew Lloyd
 
 COPY ./scripts /scripts
+
+COPY localTitan/mygraph.properties /opt/titan/conf
+
