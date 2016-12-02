@@ -1,15 +1,10 @@
-image: docker:latest
 
-# When using dind, it's wise to use the overlayfs driver for
-# improved performance.
-variables:
-  DOCKER_DRIVER: overlay
-
-
-before_script:
-- docker info
-
-build:
+docker:image:
   stage: build
+  image: docker:1.12
+  services:
+    - docker:dind
   script:
-  - docker ps 
+    - docker version
+    
+    
