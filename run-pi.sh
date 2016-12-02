@@ -23,7 +23,7 @@ function dockerLocalTitan() {
 }
 
 function runlocal() {
-	docker build -t andrew_sparktest .
+	docker build -t andrew_sparktest . --no-cache
 	trap ctrl_c INT
 	ctrl_c() {
 		echo "Shutting down containers"
@@ -36,7 +36,7 @@ function runlocal() {
 }
 
 function runlocalTitan() {
-	docker build -t andrew_sparktest .
+	docker build -t andrew_sparktest . --no-cache
 	trap ctrl_c INT
 	ctrl_c() {
 		echo "Shutting down containers"
