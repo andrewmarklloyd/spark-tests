@@ -1,10 +1,9 @@
-
 ### Requirements
 - docker v1.12
 - docker-compose v1.8
 
 ### Basic usage
-- Run ./calc-pi.sh to bring up the Spark master node, 5 Spark worker nodes, and one Spark utility node to submit the Calculate Pi job to the master
+- `./calc-pi.sh --local` Run 3 slave nodes locally without Titan integration to calculate pi and tail logs. Ctrl c will shutdown containers and show result of Pi
 - Spark master node will have a web UI accessible at http://<docker-ip>:8080 that will give details of registered nodes and jobs. IP address of docker container will vary by configuration but will generally be accessible on localhost
 
 ### Current Workarounds
@@ -13,5 +12,8 @@
 - Worker node requires 5 second delay on startup to wait for master node initialization
 - Utility node requires 25 second delay before submitting job to wait for all worker nodes to initialize
 
-### Use with Titan DB (Not implemented yet)
-- In progress
+### Use with Titan DB (Partially implemented)
+- `./calc-pi.sh --local-titan` Run 3 slave nodes with Titan integration to calculate pi and tail logs. Ctrl c will shutdown containers and show result of Pi
+
+### Use with Titan DB distributed (Not Implemented)
+- `./calc-pi.sh --cluster-titan`
