@@ -4,7 +4,7 @@ sleep 30
 
 cd /sources/SparkTitanTests/build/
 # Program options.
-NUM_SAMPLES=1000
+NUM_SAMPLES=100
 
 TITAN_LIB_DIR=local:/opt/titan/lib
 
