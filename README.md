@@ -12,11 +12,9 @@
 - Worker node requires 5 second delay on startup to wait for master node initialization
 - Utility node requires 25 second delay before submitting job to wait for all worker nodes to initialize
 
-### Use with Titan DB (Partially implemented)
+### Use with Titan DB
 - `./run-pi.sh --local-titan` Run 3 slave nodes with Titan integration to calculate pi and tail logs. Ctrl c will shutdown containers and show result of Pi
 - Connects remotely to distributed cassandra database via Titan
-- Implementing remote elastic search container now
-    - Lack of elasticsearch implementation results in extremly slow run time. Time will be reduced dramatically after elasticsearch implementation
 
 ### Use with Titan DB distributed (Not Implemented)
 - `./run-pi.sh --cluster-titan`
